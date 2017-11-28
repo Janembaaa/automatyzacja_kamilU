@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using Xunit;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
+using System.Linq;
 
 namespace SeleniumTests
 {
@@ -14,12 +15,15 @@ namespace SeleniumTests
         private IWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
+        private IWebDriver _driver;
+
         private bool acceptNextAlert = true;
 
         public Example()
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(100);
             baseURL = "https://www.google.pl/";
             verificationErrors = new StringBuilder();
         }
@@ -35,63 +39,40 @@ namespace SeleniumTests
             driver.FindElement(By.Id("lst-ib")).Submit();
             driver.FindElement(By.LinkText("Code Sprinters -")).Click();
 
-            var element = driver.FindElement(By.LinkText("Poznaj nasze podejście"));
+            waitForClickable(By.LinkText("Akceptuję"), 5);
 
+            driver.FindElement(By.LinkText("Akceptuję")).Click();
+
+            var element = driver.FindElement(By.LinkText("Poznaj nasze podejście"));
             Assert.NotNull(element);
 
             var elements = driver.FindElements(By.LinkText("Poznaj nasze podejście"));
-
             Assert.Single(elements);
+
+            waitForClickable(By.LinkText("Poznaj nasze podejście"), 30);
+
+            driver.FindElement(By.LinkText("Poznaj nasze podejście")).Click();
+
+            //ver1
+            Assert.Contains("WIEDZA NA PIERWSZYM MIEJSCU", driver.PageSource);
+
+            //ver2
+            Assert.Single(driver.FindElements(By.TagName("h2")).Where(tag => tag.Text == "WIEDZA NA PIERWSZYM MIEJSCU"));
 
             Thread.Sleep(10000);
         }
-        //private bool IsElementPresent(By by)
-        //{
-        //    try
-        //    {
-        //        driver.FindElement(by);
-        //        return true;
-        //    }
-        //    catch (NoSuchElementException)
-        //    {
-        //        return false;
-        //    }
-        //}
 
-        //private bool IsAlertPresent()
-        //{
-        //    try
-        //    {
-        //        driver.SwitchTo().Alert();
-        //        return true;
-        //    }
-        //    catch (NoAlertPresentException)
-        //    {
-        //        return false;
-        //    }
-        //}
+        protected void waitForClickable(By by, int seconds)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            wait.Until(ExpectedConditions.ElementToBeClickable(by));
+        }
 
-        //private string CloseAlertAndGetItsText()
-        //{
-        //    try
-        //    {
-        //        IAlert alert = driver.SwitchTo().Alert();
-        //        string alertText = alert.Text;
-        //        if (acceptNextAlert)
-        //        {
-        //            alert.Accept();
-        //        }
-        //        else
-        //        {
-        //            alert.Dismiss();
-        //        }
-        //        return alertText;
-        //    }
-        //    finally
-        //    {
-        //        acceptNextAlert = true;
-        //    }
-        //}
+        protected void waitForElementPresent(IWebElement by, int seconds)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            wait.Until(ExpectedConditions.ElementToBeClickable(by));
+        }
 
         public void Dispose()
         {
