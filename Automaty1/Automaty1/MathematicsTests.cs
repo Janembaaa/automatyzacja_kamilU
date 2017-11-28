@@ -112,5 +112,25 @@ namespace Automaty1
             // assert
             Assert.Equal(-5, result);
         }
+
+        // przypadek kiedy dane mamy podane w InlineData
+        [Theory]
+        [InlineData(10, 20, 30)]
+        [InlineData(0, 0, 0)]
+        [InlineData(1, 2, 3)]
+        [InlineData(-10, 20, 10)]
+        [InlineData(100000, 200000, 300000)]
+        [InlineData(-0, 0, 0)]
+        public void TheoryExample(double x, double y, double expected)
+        {
+            // arrange
+            var math = new Mathematics();
+
+            // act
+            var result = math.Add(x, y);
+
+            // assert
+            Assert.Equal(expected, result);
+        }
     }
 }
