@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.ObjectModel;
 
@@ -8,6 +9,11 @@ namespace PageObjectBlogTests
     internal class Browser
     {
         private static IWebDriver driver;
+
+        internal static IWebElement FindElementById(string id)
+        {
+            return driver.FindElement(By.Id(id));
+        }
 
         static Browser()
         {
