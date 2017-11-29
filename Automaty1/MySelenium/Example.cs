@@ -39,17 +39,20 @@ namespace SeleniumTests
             driver.FindElement(By.Id("lst-ib")).Submit();
             driver.FindElement(By.LinkText("Code Sprinters -")).Click();
 
-            waitForClickable(By.LinkText("Akceptuję"), 5);
+            waitForClickable(By.LinkText("Akceptuję"), 11);
 
             driver.FindElement(By.LinkText("Akceptuję")).Click();
 
-            var element = driver.FindElement(By.LinkText("Poznaj nasze podejście"));
-            Assert.NotNull(element);
+            //var element = driver.FindElement(By.LinkText("Poznaj nasze podejście"));
+            //Assert.NotNull(element);
 
-            var elements = driver.FindElements(By.LinkText("Poznaj nasze podejście"));
-            Assert.Single(elements);
+            //var elements = driver.FindElements(By.LinkText("Poznaj nasze podejście"));
+            //Assert.Single(elements);
 
-            waitForClickable(By.LinkText("Poznaj nasze podejście"), 30);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(11));
+            wait.Until(ExpectedConditions.InvisibilityOfElementWithText(By.LinkText("Akceptuję"), "Akceptuję"));
+
+            waitForClickable(By.LinkText("Poznaj nasze podejście"), 5);
 
             driver.FindElement(By.LinkText("Poznaj nasze podejście")).Click();
 
