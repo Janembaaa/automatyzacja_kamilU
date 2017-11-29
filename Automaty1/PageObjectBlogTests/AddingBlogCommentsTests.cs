@@ -1,18 +1,28 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace PageObjectBlogTests
 {
-    public class AddingBlogCommentsTests
+    public class AddingBlogCommentsTests : IDisposable
     {
         [Fact]
         public void CanAddCommentToTheBlogNote()
         {
+            //otworz url
             MainPage.Open();
 
-            //wejdz na url bloga
             //otworz pierwsza notke
+            MainPage.OpenFirstNote();
+
             //dodaj komentarz
+            
+
             //sprawdz ze komentarz sie dodal
+        }
+
+        public void Dispose()
+        {
+            Browser.Close();
         }
     }
 }
