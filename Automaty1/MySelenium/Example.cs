@@ -12,31 +12,35 @@ namespace SeleniumTests
 {
     public class Example : IDisposable
     {
+        private const string SearchTextBoxId = "lst-ib";
+        private const string Google = "https://www.google.com";
+
         private IWebDriver driver;
         private StringBuilder verificationErrors;
-        private string baseURL;
-        private IWebDriver _driver;
-
-        private bool acceptNextAlert = true;
 
         public Example()
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(100);
-            baseURL = "https://www.google.pl/";
             verificationErrors = new StringBuilder();
         }
-
-       
+  
 
         [Fact]
         public void TheExampleTest()
         {
-            driver.Navigate().GoToUrl(baseURL);
-            driver.FindElement(By.Id("lst-ib")).Clear();
-            driver.FindElement(By.Id("lst-ib")).SendKeys("code sprinters");
-            driver.FindElement(By.Id("lst-ib")).Submit();
+            driver.Navigate().GoToUrl(Google);
+
+            IWebElement searchBox = GetSearchBOx();
+            searchBox.Clear();
+            searchBox.SendKeys("code sprinters");
+            searchBox.Submit();
+
+
+            driver.FindElement(By.Id(SearchTextBoxId)).Clear();
+            driver.FindElement(By.Id(SearchTextBoxId)).SendKeys("code sprinters");
+            driver.FindElement(By.Id(SearchTextBoxId)).Submit();
             driver.FindElement(By.LinkText("Code Sprinters -")).Click();
 
             waitForClickable(By.LinkText("Akceptuję"), 11);
@@ -62,7 +66,12 @@ namespace SeleniumTests
             //ver2
             Assert.Single(driver.FindElements(By.TagName("h2")).Where(tag => tag.Text == "WIEDZA NA PIERWSZYM MIEJSCU"));
 
-            Thread.Sleep(10000);
+            Thread.Sleep(5000);
+        }
+
+        private IWebElement GetSearchBOx()
+        {
+            return driver.FindElement(By.Id(SearchTextBoxId));
         }
 
         protected void waitForClickable(By by, int seconds)
