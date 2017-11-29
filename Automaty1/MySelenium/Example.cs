@@ -5,10 +5,7 @@ using OpenQA.Selenium.Support.UI;
 using Xunit;
 using OpenQA.Selenium.Chrome;
 using System.Linq;
-using OpenQA.Selenium.Firefox;
-using System.Threading;
 using System.Collections.ObjectModel;
-using System.Collections;
 
 namespace SeleniumTests
 {
@@ -19,6 +16,7 @@ namespace SeleniumTests
         private const string PageTitle = "Code Sprinters -";
         private const string TextToSearch = "code sprinters";
         private const string LinkTextToFind = "Poznaj nasze podejście";
+        private const string CookiesPolicy = "Akceptuję";
         private IWebDriver driver;
         private StringBuilder verificationErrors;
 
@@ -27,7 +25,7 @@ namespace SeleniumTests
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts()
-                .ImplicitWait = TimeSpan.FromMilliseconds(100);
+            .ImplicitWait = TimeSpan.FromMilliseconds(100);
             verificationErrors = new StringBuilder();
         }
 
@@ -40,10 +38,7 @@ namespace SeleniumTests
 
             Assert.Single(GetElementsByLinkText(LinkTextToFind));
 
-            driver.FindElement(By.LinkText("Akceptuję")).Click();
-
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(11));
-            wait.Until(ExpectedConditions.InvisibilityOfElementWithText(By.LinkText("Akceptuję"), "Akceptuję"));
+            AcceptCookies();
 
             WaitForClickable(By.LinkText("Poznaj nasze podejście"), 5);
 
@@ -58,6 +53,14 @@ namespace SeleniumTests
                 .Where(tag => tag.Text == "WIEDZA NA PIERWSZYM MIEJSCU"));
 
 
+        }
+
+        private void AcceptCookies()
+        {
+            driver.FindElement(By.LinkText(CookiesPolicy)).Click();
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(11));
+            wait.Until(ExpectedConditions.InvisibilityOfElementWithText(By.LinkText("Akceptuję"), "Akceptuję"));
         }
 
         private ReadOnlyCollection<IWebElement> GetElementsByLinkText(string text)
