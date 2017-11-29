@@ -17,6 +17,7 @@ namespace SeleniumTests
         private const string TextToSearch = "code sprinters";
         private const string LinkTextToFind = "Poznaj nasze podejście";
         private const string CookiesPolicy = "Akceptuję";
+        private const string DesiredTextLink = "Poznaj nasze podejście";
         private IWebDriver driver;
         private StringBuilder verificationErrors;
 
@@ -40,19 +41,27 @@ namespace SeleniumTests
 
             AcceptCookies();
 
-            WaitForClickable(By.LinkText("Poznaj nasze podejście"), 5);
+            GoToDesiredPage();
 
-            driver.FindElement(By.LinkText("Poznaj nasze podejście")).Click();
+            Assert.Single(GetElementByText());
+        }
 
-            // ver 1
-            Assert.Contains("WIEDZA NA PIERWSZYM MIEJSCU", driver.PageSource);
+        private System.Collections.Generic.IEnumerable<IWebElement> GetElementByText()
+        {
+            return TextOnPage();
+        }
 
+        private System.Collections.Generic.IEnumerable<IWebElement> TextOnPage()
+        {
+            return driver.FindElements(By.TagName("h2"))
+                                        .Where(tag => tag.Text == "WIEDZA NA PIERWSZYM MIEJSCU");
+        }
 
-            // ver 2
-            Assert.Single(driver.FindElements(By.TagName("h2"))
-                .Where(tag => tag.Text == "WIEDZA NA PIERWSZYM MIEJSCU"));
+        private void GoToDesiredPage()
+        {
+            WaitForClickable(By.LinkText(DesiredTextLink), 5);
 
-
+            driver.FindElement(By.LinkText(DesiredTextLink)).Click();
         }
 
         private void AcceptCookies()
