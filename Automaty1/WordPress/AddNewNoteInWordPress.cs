@@ -33,6 +33,9 @@ namespace WordPress
 
             //sprawdz dodany post
             PostPage.ViewAddedPost();
+
+            //wyloguj usera
+            PostPage.LogoutUser();
         }
     }
 }

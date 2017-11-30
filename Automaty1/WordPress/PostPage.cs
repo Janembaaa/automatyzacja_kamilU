@@ -34,6 +34,17 @@ namespace WordPress
         {
             var viewPost = Browser.FindByXpath("//*[@id='message']/p/a").First();
             viewPost.Click();
+            Thread.Sleep(5000);
+        }
+
+        internal static void LogoutUser()
+        {
+            var logoutIcon = Browser.FindByXpath("//*[@id='wp-admin-bar-my-account']/a/img").First();
+            logoutIcon.Click();
+            Thread.Sleep(2000);
+
+            var signOut = Browser.FindByXpath("//button[text()='Sign Out']").First();
+            signOut.Click();
         }
     }
 }
