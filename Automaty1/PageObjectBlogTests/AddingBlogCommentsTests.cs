@@ -1,5 +1,6 @@
 ﻿using PageObjectTests;
 using System;
+using System.Threading;
 using Xunit;
 
 namespace PageObjectBlogTests
@@ -23,9 +24,29 @@ namespace PageObjectBlogTests
                 Mail = (Guid.NewGuid() + "@onet.pl"),
                 User = "Jan Usz"
             });
-                
+
             //sprawdz ze komentarz sie dodal
+            NotePage.CheckComment();
         }
+
+        [Fact]
+        public void CanAddCommentToPreviouslyAddedComment()
+        {
+            //otworz url
+            MainPage.Open();
+
+            //otworz pierwsza notke
+            MainPage.OpenFirstNote();
+
+            //otworz pierwszy komentarz
+            NotePage.OpenFirstComment();
+
+            Thread.Sleep(10000);
+        }
+
+
+
+
 
         public void Dispose()
         {

@@ -1,6 +1,8 @@
 ﻿using PageObjectBlogTests;
 using System.Linq;
 using System.Threading;
+using Xunit;
+using System;
 
 namespace PageObjectTests
 {
@@ -26,8 +28,18 @@ namespace PageObjectTests
 
             var submit = Browser.FindElementById("comment-submit");
             submit.Click();
+        }
 
-            Thread.Sleep(20000);
+        internal static void CheckComment()
+        {
+            var addedEmail = Browser.FindElementById("comment");
+            addedEmail.Click();
+        }
+
+        internal static void OpenFirstComment()
+        {
+            var elements = Browser.FindByXpath("//article/footer");
+            elements.First().Click();
         }
     }
 }

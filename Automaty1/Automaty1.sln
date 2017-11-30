@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PageObject", "PageObject", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageObjectBlogTests", "PageObjectBlogTests\PageObjectBlogTests.csproj", "{3EDDC0B3-B833-4704-A303-D0367E080FC2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PageObjectWordPress", "PageObjectWordPress", "{CD923EEF-1EFC-44D1-B3A8-64B97D622929}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordPress", "WordPress\WordPress.csproj", "{599EA314-89F1-4368-A0B3-788162D3C1C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +33,17 @@ Global
 		{3EDDC0B3-B833-4704-A303-D0367E080FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EDDC0B3-B833-4704-A303-D0367E080FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EDDC0B3-B833-4704-A303-D0367E080FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599EA314-89F1-4368-A0B3-788162D3C1C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599EA314-89F1-4368-A0B3-788162D3C1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599EA314-89F1-4368-A0B3-788162D3C1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599EA314-89F1-4368-A0B3-788162D3C1C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3EDDC0B3-B833-4704-A303-D0367E080FC2} = {253DCCF1-C574-4C23-9177-E66053AC87C6}
+		{599EA314-89F1-4368-A0B3-788162D3C1C1} = {CD923EEF-1EFC-44D1-B3A8-64B97D622929}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C2305EE-3753-4408-9B6E-5D1AE7C37DAB}
