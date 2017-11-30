@@ -18,11 +18,14 @@ namespace WordPress
             var emailBox = Browser.FindElementById("usernameOrEmail");
             emailBox.SendKeys(testdata.Mail);
 
+            var submit = Browser.FindByXpath("//*[@id='primary']/div/main/div/div[1]/div/form/div[1]/div[2]/button").First();
+            submit.Click();
+
             var passwordBox = Browser.FindElementById("password");
             passwordBox.SendKeys(testdata.Password);
 
-            var submit = Browser.FindElementById("primary");
-            submit.Click();
+            var submit1 = Browser.FindElementById("primary");
+            submit1.Click();
         }
 
 
