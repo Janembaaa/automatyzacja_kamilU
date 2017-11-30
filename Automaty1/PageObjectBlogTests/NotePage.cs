@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using PageObjectBlogTests;
+using System.Linq;
 using System.Threading;
 
-namespace PageObjectBlogTests
+namespace PageObjectTests
 {
     internal class NotePage
     {
@@ -11,22 +12,22 @@ namespace PageObjectBlogTests
             commentBox.Click();
             commentBox.SendKeys(testData.Text);
 
-            var emailBox = Browser.FindElementById("email");
-            emailBox.Click();
-            emailBox.SendKeys(testData.Mail);
+            var emailLabel = Browser.FindByXpath("//label[@for='email']").First();
+            emailLabel.Click();
+
+            var email = Browser.FindElementById("email");
+            email.SendKeys(testData.Mail);
 
             var nameLabel = Browser.FindByXpath("//label[@for='author']").First();
             nameLabel.Click();
 
-            Thread.Sleep(2000);
-
-            var nameBox = Browser.FindElementById("author");
-            nameBox.Click();
-            nameBox.SendKeys(testData.User);
+            var name = Browser.FindElementById("author");
+            name.SendKeys(testData.User);
 
             var submit = Browser.FindElementById("comment-submit");
             submit.Click();
 
+            Thread.Sleep(20000);
         }
     }
 }

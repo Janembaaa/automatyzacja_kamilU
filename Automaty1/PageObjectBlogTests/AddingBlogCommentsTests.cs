@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PageObjectTests;
+using System;
 using Xunit;
 
 namespace PageObjectBlogTests
@@ -17,9 +18,10 @@ namespace PageObjectBlogTests
             //dodaj komentarz, NotePage zamiast MainPage bo to nowa podstrona
             NotePage.AddComment(new Comment
             {
-                Text = "Lorem ipsum dupa dupa",
-                Mail = "test@test.pl",
-                User = "białko"
+                Text = (Guid.NewGuid() + Guid.NewGuid().ToString()),
+                // jeśli dodajemy dwa GUIDy, jeden trzeba zmienić na stringa
+                Mail = (Guid.NewGuid() + "@onet.pl"),
+                User = "Jan Usz"
             });
                 
             //sprawdz ze komentarz sie dodal
