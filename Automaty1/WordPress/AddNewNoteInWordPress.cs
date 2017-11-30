@@ -24,9 +24,15 @@ namespace WordPress
             });
             Thread.Sleep(5000);
 
-            //dodaj nowy post
+            //otworz menu postów
             PostPage.EnterPostMenu();
 
+            //dodaj nowy post
+            PostPage.EnterPostBody();
+            Thread.Sleep(5000);
+
+            //sprawdz dodany post
+            PostPage.ViewAddedPost();
         }
     }
 }
