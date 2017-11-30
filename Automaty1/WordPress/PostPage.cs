@@ -46,5 +46,17 @@ namespace WordPress
             var signOut = Browser.FindByXpath("//button[text()='Sign Out']").First();
             signOut.Click();
         }
+
+        internal static void RemovePostFromTheList()
+        {
+            var postCheckbox = Browser.FindElementById("cb - select -");
+            postCheckbox.Click();
+        }
+
+        internal static void EnterAllPostMenu()
+        {
+            var menuPosts = Browser.FindByXpath("//*[@id='menu-posts']/a/div[3]").First();
+            menuPosts.Click();
+        }
     }
 }

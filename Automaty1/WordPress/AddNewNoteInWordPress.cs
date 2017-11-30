@@ -37,5 +37,26 @@ namespace WordPress
             //wyloguj usera
             PostPage.LogoutUser();
         }
+
+        [Fact]
+        public void CanRemovePostFromPostList()
+        {
+            //otworz url
+            MainPage.Open();
+
+            //wpisz dane i przejdz dalej
+            MainPage.EnterCredentials(new Credentials
+            {
+                Mail = "autotestdotnet@gmail.com",
+                Password = "P@ssw0rd1"
+            });
+            Thread.Sleep(5000);
+
+            //otworz menu postów
+            PostPage.EnterAllPostMenu();
+
+            //zaznacz post i usun
+            PostPage.RemovePostFromTheList();
+        }
     }
 }
