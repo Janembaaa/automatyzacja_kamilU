@@ -19,11 +19,11 @@ namespace WordPress
         {
             var postTitle = Browser.FindElementById("title");
             postTitle.Click();
-            postTitle.SendKeys(Guid.NewGuid() + "");
+            postTitle.SendKeys("Jak ja bym chciał, żeby to działało");
 
             var postContent = Browser.FindElementById("content");
             postContent.Click();
-            postContent.SendKeys(Guid.NewGuid() + "");
+            postContent.SendKeys("Jednak działa!");
             Thread.Sleep(5000);
 
             var postPublish = Browser.FindElementById("publish");
@@ -49,8 +49,11 @@ namespace WordPress
 
         internal static void RemovePostFromTheList()
         {
-            var postCheckbox = Browser.FindElementById("cb - select -");
+            var postCheckbox = Browser.FindByXpath("//a[text()='Jak ja bym chciał, żeby to działało']").First();
             postCheckbox.Click();
+
+            var trashPost = Browser.FindByXpath("//*[@id='delete-action']/a").First();
+            trashPost.Click();
         }
 
         internal static void EnterAllPostMenu()

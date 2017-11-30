@@ -36,11 +36,8 @@ namespace WordPress
 
             //wyloguj usera
             PostPage.LogoutUser();
-        }
+            Thread.Sleep(1500);
 
-        [Fact]
-        public void CanRemovePostFromPostList()
-        {
             //otworz url
             MainPage.Open();
 
@@ -57,6 +54,11 @@ namespace WordPress
 
             //zaznacz post i usun
             PostPage.RemovePostFromTheList();
+        }
+
+        public void Dispose()
+        {
+            Browser.Close();
         }
     }
 }

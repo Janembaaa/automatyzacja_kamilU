@@ -44,10 +44,6 @@ namespace PageObjectBlogTests
             Thread.Sleep(10000);
         }
 
-
-
-
-
         public void Dispose()
         {
             Browser.Close();

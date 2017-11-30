@@ -31,5 +31,10 @@ namespace WordPress
         {
             driver.Navigate().GoToUrl(url);
         }
+
+        internal static void Close()
+        {
+            driver.Quit();
+        }
     }
 }
