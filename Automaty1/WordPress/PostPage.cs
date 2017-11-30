@@ -10,8 +10,8 @@ namespace WordPress
             var menuPosts = Browser.FindByXpath("//*[@id='menu-posts']/a/div[3]").First();
             menuPosts.Click();
 
-           // var menuPost = Browser.FindByCSS("#menu-posts>a> div.wp-menu-name");
-           // menuPost.Click();
+           var addPost = Browser.FindByXpath("//*[@id='wpbody-content']/div[3]/a").First();
+           addPost.Click();
 
         }
     }
